@@ -1,31 +1,18 @@
-from funcs import ops, add, subtract, multiply, division
+from funcs import Operate
 
 def main():
-    print("Welcome to TheCalculator!\nType in 'exit' to close out.")
+    print("Welcome to TheCalculator!\nType in 'exit' to close out.\n")
     
     while True:
-        statement = input("> ").strip().replace(" ", "") # takes in user input eg. 2+2
-        num1,num2 = statement[0],statement[2]
+        statement = input("> ").strip() # takes in user input eg. 2+2
         if statement == 'exit':
             break
+        result = Operate(statement)
+        if result == "Error":
+            print("> please enter a proper statement to be calculated")
+            continue
+        print(">", result)
 
-        match statement[1]:
-            case '+':
-                print(">", add(num1,num2))
-                continue
-            case '-':
-                print(">", subtract(num1,num2))
-                continue
-            case '*':
-                print(">", multiply(num1,num2))
-                continue
-            case '/':
-                print(">", division(num1,num2))
-                continue
-            case _:
-                print(">", statement)
-                continue
-        
 
 main()
 
