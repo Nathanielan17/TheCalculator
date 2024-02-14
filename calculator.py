@@ -2,6 +2,7 @@ from funcs import Operate
 
 def main():
     print("Welcome to TheCalculator!\nType in 'exit' to close out.\n")
+    print("Testing Merging") # Delete after merge
     
     while True:
         statement = input("> ").strip() # takes in user input eg. 2+2
