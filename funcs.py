@@ -9,66 +9,37 @@ def Operate(statement):
     ind = 0
     numberQueue = []
     opQueue = []
-    numToAdd = ""
     start = 0
+    invalidArgs = "Error improper statement"
 
     if not temp[ind].isdigit(): #or not (temp[ind] != '-' and temp[ind+1].isnumeric()):
-        return "Error improper statement"
-    else:
-        if temp[ind] == "-" and not temp[ind+1].isdigit():
-            return "Error improper statement"
+        if temp[ind] == "-":
+            if not temp[ind+1].isdigit():
+                return invalidArgs
         else:
-            if temp[ind] in valid_ops:
-                return "Error improper statement"
+            return invalidArgs
+        
 
     while ind < len(temp):
-        if temp[ind] in valid_ops and not (temp[ind-1] in valid_ops):
-                num = "".join(temp[start:ind])
+        if temp[ind] in valid_ops and not (temp[ind-1] in valid_ops): # checks if current is a op and previous is not an op
+            if ind != 0:
+                num = "".join(temp[start:ind]) # gets number before this current op
                 print(num)
-                start = ind + 1
-                numberQueue.append(num)
-                opQueue.append(temp[ind])
-        if temp[ind] in "-" and temp[ind-1] in valid_ops:
+                start = ind + 1 # sets new start index at the index after this current op
+                numberQueue.append(num) # adds previous number into queue
+                opQueue.append(temp[ind]) # adds this current operation into queue
+        if temp[ind] in "-" and (temp[ind-1] in valid_ops or ind==0):
             start = ind
         ind += 1
     num = "".join(temp[start:ind])
     numberQueue.append(num)
     return numberQueue, opQueue
 
-    # slist = rmSpace(list(statement))
-    # if not slist[0].isnumeric(): return "Error"
-    # nums = []
-    # ops = []
-    # prev = 0
-    # print(slist)
-    # for i in range(len(slist)): # 2+-4-5+-2 
-    #     if slist[i] in valid_ops:
-    #         if slist[i] == "-" and slist[i-1] in valid_ops:
-    #             continue
-    #         nums.append("".join(slist[prev:i]))
-    #         ops.insert(0,slist[i])
-    #         prev = i+1
-    # # nums is the list of numbers (as strings) and ops is the queue of operations
-    # num1 = None
-    # num2 = None
-    # ans = None
-    # print(nums)
-    # print(ops)
-    # for i in range(len(nums)): # 2+3+4+5
-    #     if num1 == None:
-    #         num1 = nums[i]
-    #         continue
-    #     if num2 == None:
-    #         num2 = nums[i]
-    #         continue
-    #     op = ops.pop()
-    #     if ans == None:
-    #         ans = valid_ops[op](num1,num2)
-    #     val = nums[i]
-    #     ans = valid_ops[op](str(ans),val)
-    # return ans
-        
-         
+    # So now numberQueue is a list of numbers that are within the inputted statement. opQueue is also a list
+    # with the operations in the statement. Both lists are Queues in where the first number/operation is first.
+    # FIFO
+    # This will added with creating a stack to follow PEMDAS.
+
     
 
 
