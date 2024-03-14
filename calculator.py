@@ -1,4 +1,4 @@
-from funcs import Operate
+from funcs import calculate
 
 def main():
     print("Welcome to TheCalculator!\nType in 'exit' to close out.\n")
@@ -8,7 +8,7 @@ def main():
         statement = input("> ").strip() # takes in user input eg. 2+2
         if statement == 'exit':
             break
-        result = Operate(statement)
+        result = calculate(statement)
         if result == "Error":
             print("> please enter a proper statement to be calculated")
             continue

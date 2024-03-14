@@ -2,22 +2,17 @@
 import pytest
 from funcs import *
 
-def test_Operate_numList():
-    test_string = "25 + 3  -   4"
-    numQ = Operate(test_string)[0]
-    if numQ is str:
-        print("Function is reading improper input")
-    numCheck = ["25","3","4"]
-    print(numQ)
-    assert numQ == numCheck
+def test_get_list():
+    test_string = "-25 * 5 - (4 ^ -2)"
+    result = get_list(test_string)
+    correctResult = ['-25','*','5','-','(','4','^','-2',')']
+    assert result == correctResult
+    return result
 
-def test_Operate_opList():
-    test_string = "-25 + 3  -   4"
-    opQ = Operate(test_string)[1]
-    opCheck = ["+","-"]
-    print(opQ)
-    assert opQ == opCheck
-
-
-    
+def test_operate():
+    test_list = test_get_list()
+    result = newOperate(test_list)
+    print(result)
+    correctResult = ['-125.0625']
+    assert result == correctResult    
     

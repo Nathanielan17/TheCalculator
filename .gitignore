@@ -1,0 +1,10 @@
+# Ignoring pytest_cache
+./pytest_cache/*
+# Ignoring pycache
+__pycache__*
+
+# Ignoring vscode cache
+.vscode/*
+
+
+
