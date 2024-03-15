@@ -13,10 +13,10 @@ def get_list(statement):
     ind = 0
     while ind < len(slist):
         if slist[ind] == '-':
-            if ind == 0 or slist[ind-1] in valid_ops:
+            if ind == 0 or slist[ind-1] in valid_ops or slist[ind-1] == '(':
                 slist[ind] = slist[ind] + slist[ind+1]
                 slist.pop(ind+1)
-        if slist[ind].lstrip('-').isdecimal() and slist[ind+1].isdecimal():
+        if slist[ind].lstrip('-').isdecimal() and ind+1 <len(slist) and slist[ind+1].isdecimal():
             slist[ind] = slist[ind] + slist[ind+1]
             slist.pop(ind+1)
         ind += 1
@@ -41,13 +41,13 @@ def newOperate(statement: list):
         return valid_ops[operation](val_1,val_2) # Returns the result of singular operation
     
     # Not Base Case
-    for operator in precedence:
+    for op_list in precedence:
         start = -1
         end = -1
         ind = 0
         while(ind < len(statement)):
             # special case: parameters
-            if operator == '()':
+            if op_list == ('()'):
                 if statement[ind] == '(':
                     start = ind
                 if statement[ind] == ')':
@@ -59,16 +59,15 @@ def newOperate(statement: list):
                     ind = end - start
                 ind += 1
             else:
-                if statement[ind] == operator:
+                if statement[ind] in op_list:
                     start = ind - 1
                     end = ind + 1
                     statement[ind] = newOperate(statement[start:end+1])
-                    print(statement[ind])
                     # Original length of statement is for example 9 and op is at ind 4 then 0:3 + ind...0 1 2 3 4 6 8
                     statement = statement[:start] + statement[ind:ind+1] + statement[end+1:] # what happens if start = 0
                     ind-=1 # readjusts index so that ind is at result new location
                 ind += 1
-    return statement
+    return statement[0]
     
 def add(a,b):
     return str(Decimal(a) + Decimal(b))
@@ -98,19 +97,14 @@ valid_ops = {
 }
 
 precedence = [
-    '()',
-    '^',
-    '%',
-    '*',
-    '/',
-    '+',
-    '-'
+    ('()'),
+    ('^'),
+    ('%', '*', '/'),
+    ('+','-')
 ]
 
 def calculate(equation: str):
 
     listOfElems = get_list(equation)
-    Result = newOperate(listOfElems) 
-    return Result[0]
-
-    # use the rules of pemdas to get the proper code
+    Result = newOperate(listOfElems)
+    return Result
