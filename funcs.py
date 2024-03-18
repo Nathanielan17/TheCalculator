@@ -12,13 +12,16 @@ def get_list(statement):
     slist = list(statement.replace(" ", ""))
     ind = 0
     while ind < len(slist):
-        if slist[ind] == '-':
-            if ind == 0 or slist[ind-1] in valid_ops or slist[ind-1] == '(':
+        if slist[ind] == '-': # if current index is a '-' symbol, and if its a negative sign
+            if ind == 0 or slist[ind-1] in valid_ops or slist[ind-1] == '(': 
                 slist[ind] = slist[ind] + slist[ind+1]
                 slist.pop(ind+1)
+                continue
+        # if this is a number and the next element is also a number concatenate them.
         if slist[ind].lstrip('-').isdecimal() and ind+1 <len(slist) and slist[ind+1].isdecimal():
             slist[ind] = slist[ind] + slist[ind+1]
             slist.pop(ind+1)
+            continue
         ind += 1
     return slist
     

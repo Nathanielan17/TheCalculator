@@ -1,19 +1,32 @@
 from funcs import calculate
 
-def main():
-    print("Welcome to TheCalculator!\nType in 'exit' to close out.\n")
-    print("Testing Merging") # Delete after merge
+class Calculator:
+
+    def __init__(self):
+        self.expr = "" # Expression string
+        self.Result = '' # Result of current expr
+        self.log = [] # log of inputs
+        self.prevResult = None  # Previous result
+
+    # check_expression makes sure expression entered is valid before calculating
+    def check_expression(self):
+        ...
+
+
+    # clear() clears the calculator log, expr, result, prevResult 
+    # and sets up the calculator for the next input
+    def clear(self):
+        self.log = [] # clears log 
+        self.Result = ''
+        self.prevResult = ''
+        self.expr = ''
     
-    while True:
-        statement = input("> ").strip() # takes in user input eg. 2+2
-        if statement == 'exit':
-            break
-        result = calculate(statement)
-        if result == "Error":
-            print("> please enter a proper statement to be calculated")
-            continue
-        print(">", result)
+    def clear_Entry(self):
+        self.expr = ''
 
-
-main()
+    def get_Result(self):
+        self.log.append(self.expr)
+        self.Result = calculate(self.expr) # gets result based on expression
+        self.prevResult = self.Result
+        return self.Result
 
