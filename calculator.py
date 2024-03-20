@@ -1,4 +1,4 @@
-from funcs import calculate
+from funcs import calculate, get_list, valid_ops
 
 class Calculator:
 
@@ -10,6 +10,11 @@ class Calculator:
 
     # check_expression makes sure expression entered is valid before calculating
     def check_expression(self):
+        s = get_list(self.expr)
+        for elem in s:
+            if not (elem.isdecimal() or elem in valid_ops or elem == '(' or elem == ')'):
+                return False
+        return True
         ...
 
 
@@ -25,6 +30,8 @@ class Calculator:
         self.expr = ''
 
     def get_Result(self):
+        if not self.check_expression():
+            return 'ERR'
         self.log.append(self.expr)
         self.Result = calculate(self.expr) # gets result based on expression
         self.prevResult = self.Result

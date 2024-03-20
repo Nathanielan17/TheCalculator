@@ -18,7 +18,11 @@ def get_list(statement):
                 slist.pop(ind+1)
                 continue
         # if this is a number and the next element is also a number concatenate them.
-        if slist[ind].lstrip('-').isdecimal() and ind+1 <len(slist) and slist[ind+1].isdecimal():
+        if slist[ind] == '.' and ind+1<len(slist) and slist[ind+1].isdecimal():
+            slist[ind] = slist[ind] + slist[ind +1]
+            slist.pop(ind+1)
+            continue
+        if slist[ind].lstrip('-').replace('.','').isdecimal() and ind+1 <len(slist) and (slist[ind+1].isdecimal() or slist[ind+1] == '.'):
             slist[ind] = slist[ind] + slist[ind+1]
             slist.pop(ind+1)
             continue

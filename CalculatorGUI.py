@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import END
+from tkinter import END, messagebox
 from calculator import Calculator
 
 class CalculatorGUI():
@@ -12,8 +12,8 @@ class CalculatorGUI():
 
         mainFrame =tk.Frame(self.root) # main frame containing all frames
         mainFrame.columnconfigure(0,weight=3) # calc Frame
-        mainFrame.columnconfigure(1,weight=1) # list of inputs
-        mainFrame.columnconfigure(2,weight=1) # list of results
+        #mainFrame.columnconfigure(1,weight=1) # list of inputs
+        #mainFrame.columnconfigure(2,weight=1) # list of results
         mainFrame.rowconfigure(0,weight=1)
 
 
@@ -60,7 +60,14 @@ class CalculatorGUI():
                 case '+/-':
                     my_calc.expr = my_calc.expr + '-'
                 case '=':
-                    my_calc.expr = my_calc.get_Result()
+                    
+                    
+                    s = my_calc.get_Result()
+                    if s == 'ERR':
+                        messagebox.showerror("Invalid Expression", "Please input a valid expression")
+                    else:
+                        my_calc.expr = s
+
                 case _:
                     my_calc.expr = my_calc.expr + btn.cget('text')
 
@@ -81,10 +88,10 @@ class CalculatorGUI():
         text_screen.insert('1.0', my_calc.expr)
         text_screen.grid(row=0,column=0,sticky=tk.W + tk.E + tk.N + tk.S)
 
-        btn1 = tk.Button(mainFrame,text='calc')
-        btn1.grid(row=0,column=1,sticky=tk.W + tk.E + tk.N + tk.S)
-        btn2 = tk.Button(mainFrame,text='calc2')
-        btn2.grid(row=0,column=2,sticky=tk.W + tk.E + tk.N + tk.S)
+        # btn1 = tk.Button(mainFrame,text='calc')
+        # btn1.grid(row=0,column=1,sticky=tk.W + tk.E + tk.N + tk.S)
+        # btn2 = tk.Button(mainFrame,text='calc2')
+        # btn2.grid(row=0,column=2,sticky=tk.W + tk.E + tk.N + tk.S)
         mainFrame.grid_propagate(False)
         mainFrame.pack(expand=True,fill='both')
 
