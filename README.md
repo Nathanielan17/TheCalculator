@@ -1,3 +1,4 @@
 BEHOLD MY FIRST OFFICIAL GITHUB PROJECT!
-It's not the most extravagant but it's to help me get used to git,github, doing a project without having some tutorial etc. 
-I will update this README when i make progess so be sure to look here when you can!....or not its just a calculator project so...yea
+The purpose of this project is to create a calculator application where a user inputs an expression into the GUI and it will calculate the result.
+This program primarily uses a recursive algorithim to break down the expression and use PEMDAS to accurately calculate the result. The Tkinter framework was
+used to create the calculator GUI.
