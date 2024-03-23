@@ -42,7 +42,7 @@ class CalculatorGUI():
             '(', ')', '^', '/', '7',
             '8', '9', '*', '4', '5', '6',
             '-', '1', '2', '3', '+',
-            '+/-', '0', '.', '='
+            'ans', '0', '.', '='
         ]
 
         # special keys:
@@ -57,8 +57,8 @@ class CalculatorGUI():
                     my_calc.clear_Entry()
                 case 'del':
                     my_calc.expr = my_calc.expr[:len(my_calc.expr)-1]
-                case '+/-':
-                    my_calc.expr = my_calc.expr + '-'
+                case 'ans':
+                    my_calc.expr = my_calc.expr + my_calc.prevResult
                 case '=':
                     
                     

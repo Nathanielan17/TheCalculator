@@ -6,7 +6,7 @@ class Calculator:
         self.expr = "" # Expression string
         self.Result = '' # Result of current expr
         self.log = [] # log of inputs
-        self.prevResult = None  # Previous result
+        self.prevResult = ''  # Previous result
 
     # check_expression makes sure expression entered is valid before calculating
     def check_expression(self):
@@ -30,8 +30,8 @@ class Calculator:
         self.expr = ''
 
     def get_Result(self):
-        if not self.check_expression():
-            return 'ERR'
+        # if not self.check_expression():
+        #     return 'ERR'
         self.log.append(self.expr)
         self.Result = calculate(self.expr) # gets result based on expression
         self.prevResult = self.Result
