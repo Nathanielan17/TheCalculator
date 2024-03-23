@@ -74,7 +74,7 @@ class CalculatorGUI():
             text_screen.delete('1.0',END)
             text_screen.insert('1.0',my_calc.expr)
       
-            print(my_calc.expr)
+            
 
         for i in range(6):
             for j in range(4):
